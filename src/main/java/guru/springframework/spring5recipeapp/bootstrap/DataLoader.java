@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -39,6 +41,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	}
 	
 	@Override
+	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		recipeRepository.saveAll(getRecipes());
 		log.debug("Loading Bootstrap Data");

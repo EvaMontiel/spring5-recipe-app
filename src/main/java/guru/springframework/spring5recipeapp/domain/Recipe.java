@@ -19,8 +19,8 @@ import javax.persistence.OneToOne;
 
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class Recipe {
 
 	@Id
