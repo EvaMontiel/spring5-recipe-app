@@ -119,8 +119,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 		perfectGuacamole.setCookTime(0);
 		perfectGuacamole.setServings(4);
 		perfectGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
-		perfectGuacamole.setDirections("1.Cut the avocado:\r\n"
-				+ "Cut the avocados in half. Remove the pit. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. (See How to Cut and Peel an Avocado.) Place in a bowl.\\r\\n"
+		perfectGuacamole.setSource("Simply Recipes");
+		perfectGuacamole.setDirections("1.Cut the avocado:\n"
+				+ "Cut the avocados in half. Remove the pit. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. (See How to Cut and Peel an Avocado.) Place in a bowl.\n"
 				+ "2.Mash the avocado flesh:\r\n"
 				+ "Using a fork, roughly mash the avocado. (Don't overdo it! The guacamole should be a little chunky.)\r\n"
 				+ "Add the remaining ingredients to taste:\r\n"
