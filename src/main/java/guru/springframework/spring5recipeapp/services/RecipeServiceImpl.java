@@ -1,7 +1,6 @@
 package guru.springframework.spring5recipeapp.services;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -26,6 +25,11 @@ public class RecipeServiceImpl implements RecipeService {
 		Set<Recipe> recipeSet = new HashSet<>();
 		recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
 		return recipeSet;
+	}
+
+	@Override
+	public Recipe findById(Long id) {
+		return recipeRepository.findById(id).orElseThrow(() -> new RuntimeException("Recipe Not Found"));
 	}
 	
 }
