@@ -2,6 +2,7 @@ package guru.springframework.spring5recipeapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.spring5recipeapp.services.RecipeService;
@@ -17,7 +18,7 @@ public class IndexController {
 		this.recipeService = recipeService;
 	}
 
-	@RequestMapping({ "", "/", "/index" })
+	@GetMapping({ "", "/", "/index" })
 	public String getIndexPage(Model model) {
 		log.debug("Getting Index Page");
 		model.addAttribute("recipes", recipeService.getRecipes());
