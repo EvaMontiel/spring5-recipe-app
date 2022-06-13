@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import guru.springframework.spring5recipeapp.commands.IngredientCommand;
 import guru.springframework.spring5recipeapp.commands.RecipeCommand;
+import guru.springframework.spring5recipeapp.commands.UnitOfMeasureCommand;
 import guru.springframework.spring5recipeapp.services.IngredientService;
 import guru.springframework.spring5recipeapp.services.RecipeService;
 import guru.springframework.spring5recipeapp.services.UnitOfMeasureService;
@@ -59,5 +60,25 @@ public class IngredientController {
 		log.debug("saved recipe id: " + savedCommand.getRecipeId());
 		log.debug("saved ingredient id: " + savedCommand.getId());
 		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+	}
+	
+	@GetMapping
+	@RequestMapping("/recipe/{recipeId}/ingredient/new")
+	public String createIngredient(Model model, @PathVariable String recipeId) {
+		
+		//make sure we have a good id value
+		RecipeCommand recipeCommand = recipeService.findCommandById(Long.parseLong(recipeId));
+		//TODO raise exception if null
+		
+		IngredientCommand ingredientCommand = new IngredientCommand();
+		ingredientCommand.setRecipeId(Long.parseLong(recipeId));
+		model.addAttribute("ingredient", ingredientCommand);
+		
+		//init uom
+		ingredientCommand.setUom(new UnitOfMeasureCommand());
+		
+		model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+		
+		return "recipe/ingredient/ingredientform";
 	}
 }
