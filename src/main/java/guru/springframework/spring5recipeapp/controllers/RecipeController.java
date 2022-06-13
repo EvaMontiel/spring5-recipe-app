@@ -2,9 +2,12 @@ package guru.springframework.spring5recipeapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import guru.springframework.spring5recipeapp.commands.RecipeCommand;
 import guru.springframework.spring5recipeapp.services.RecipeService;
 
 @Controller
@@ -21,5 +24,17 @@ public class RecipeController {
 	public String showById(Model model, @PathVariable String id) {
 		model.addAttribute("recipe", recipeService.findById(Long.parseLong(id)));
 		return "recipe/show";
+	}
+	
+	@RequestMapping("/new")
+	public String newRecipe(Model model) {
+		model.addAttribute("recipe", new RecipeCommand());
+		return "recipe/recipeform";
+	}
+	
+	@PostMapping
+	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
+		RecipeCommand savedCommand = recipeService.savedRecipeCommand(command);
+		return "redirect:/recipe/show/" + savedCommand.getId();
 	}
 }
